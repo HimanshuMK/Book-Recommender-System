@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Book Recommendations</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/recommend" class="nav-link">Get Recommendation</a>
+        </nav>
+        <h1>Top Book Recommendations</h1>
+        <p>Discover some of the best books to read right now!</p>
+    </header>
+
+    <!-- Main content for book cards -->
+    <main class="book-container">
+        {% for book in books %}
+        <div class="book-card">
+            <img src="{{ book.image }}" alt="{{ book.title }} cover" class="book-cover">
+            <h2 class="book-title">{{ book.title }}</h2>
+            <p class="book-author">by {{ book.author }}</p>
+            <p class="book-votes">Votes: {{ book.votes }}</p>
+            <p class="book-rating">Rating: {{ book.rating }}</p>
+        </div>
+        {% endfor %}
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Book Recommendation Website</p>
+    </footer>
+</body>
+</html>

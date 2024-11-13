@@ -1,0 +1,189 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: white;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid #444;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1rem;
+}
+
+/* Navigation Bar */
+nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.nav-link {
+    margin: 0 20px;
+    text-decoration: none;
+    color: #bbb;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #f9a825;
+}
+
+/* Main content */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Recommendation Form */
+.recommend-form {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.recommend-form input {
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background-color: #555;
+    color: white;
+}
+
+.recommend-form button {
+    background-color: #f9a825;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.recommend-form button:hover {
+    background-color: #c17900;
+}
+
+/* Book Recommendation Container */
+.book-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+/* Book Card */
+.book-card {
+    background-color: #2c2c2c;
+    border-radius: 8px;
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+.book-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #f9a825;
+}
+
+.book-author {
+    font-size: 1rem;
+    color: #bbb;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid #444;
+}
+
+footer p {
+    color: #bbb;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .nav-link {
+        margin: 0 15px;
+    }
+
+    .recommend-form {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .book-card {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        margin: 0 10px;
+    }
+
+    .recommend-form {
+        width: 90%;
+    }
+
+    .book-card {
+        width: 100%;
+        max-width: 250px;
+    }
+}

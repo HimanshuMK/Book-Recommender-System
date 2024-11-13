@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Book Recommendations</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/recommend" class="nav-link">Get Recommendation</a>
+        </nav>
+        <h1>Book Recommendations</h1>
+        <p>Find books similar to your favorites!</p>
+    </header>
+
+    
+    <main class="recommendation-container">
+        <!-- Form to take user input for book recommendation -->
+        <form action="/recommend" method="post" class="recommend-form">
+            <label for="book_name">Enter a book you like:</label>
+            <input type="text" id="book_name" name="book_name" required>
+            <button type="submit">Get Recommendation</button>
+        </form>
+        
+        <!-- Display error message if the book was not found -->
+        {% if error_message %}
+        <p style="color: red; font-weight: bold;">{{ error_message }}</p>
+        {% endif %}
+
+        <!-- Display recommendations if available -->
+        {% if recommended_books %}
+        <h2>Recommendations based on "{{ book_name }}"</h2>
+        <div class="book-container">
+            {% for book in recommended_books %}
+            <div class="book-card">
+                <img src="{{ book[2] }}" alt="{{ book[0] }} cover" class="book-cover">
+                <h2 class="book-title">{{ book[0] }}</h2>
+                <p class="book-author">by {{ book[1] }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Book Recommendation Website</p>
+    </footer>
+</body>
+</html>
