@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from starlette.requests import Request
+from rapidfuzz import process
 import numpy as np
 import pickle
 
@@ -65,17 +66,28 @@ async def recommend(request: Request):
 # Route to handle the recommendation form submission (POST request)
 @app.post("/recommend", response_class=HTMLResponse)
 async def get_recommendation(request: Request, book_name: str = Form(...)):
+    fuzzy_match = False  # Flag to indicate if the book name was corrected
+    original_book_name = book_name  # Preserve the user's original input
 
     if book_name not in pt.index:
-        # If the book is not found, raise an HTTP exception or display a user-friendly message
-        return templates.TemplateResponse(
-            "recommend.html", 
-            {
-                "request": request,
-                "book_name": book_name,
-                "error_message": "Sorry, we couldn't find the book you entered. Please try a different one."
-            }
-        )
+        # Use fuzzy matching to find the closest matching book
+        result = process.extractOne(book_name, pt.index, score_cutoff=50)
+
+        if result:
+            closest_match = result[0]  # The closest matching book title
+            book_name = closest_match
+            fuzzy_match = True  # Mark that we made a correction
+
+        else:
+            # If the book is not found, raise an HTTP exception or display a user-friendly message
+            return templates.TemplateResponse(
+                "recommend.html", 
+                {
+                    "request": request,
+                    "book_name": book_name,
+                    "error_message": "Sorry, we couldn't find any book matching your input. Please try again."
+                }
+            )
     
     # Get recommended books using the recommend_book function
     recommended_books = recommend_book(book_name)
@@ -86,7 +98,9 @@ async def get_recommendation(request: Request, book_name: str = Form(...)):
         {
             "request": request,
             "book_name": book_name,
-            "recommended_books": recommended_books
+            "recommended_books": recommended_books,
+            "fuzzy_match": fuzzy_match,
+            "original_book_name": original_book_name
         }
     )
 

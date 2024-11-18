@@ -32,21 +32,27 @@
 
         <!-- Display recommendations if available -->
         {% if recommended_books %}
-        <h2>Recommendations based on "{{ book_name }}"</h2>
-        <div class="book-container">
-            {% for book in recommended_books %}
-            <div class="book-card">
-                <img src="{{ book[2] }}" alt="{{ book[0] }} cover" class="book-cover">
-                <h2 class="book-title">{{ book[0] }}</h2>
-                <p class="book-author">by {{ book[1] }}</p>
+            <h2>Recommendations based on "{{ book_name }}"</h2>
+            {% if fuzzy_match %}
+                <p style="color: #f9a825;">
+                    Did you mean "<strong>{{ book_name }}</strong>"? Here are some recommendations based on it:
+                </p>
+            {% endif %}
+
+            <div class="book-container">
+                {% for book in recommended_books %}
+                <div class="book-card">
+                    <img src="{{ book[2] }}" alt="{{ book[0] }} cover" class="book-cover">
+                    <h2 class="book-title">{{ book[0] }}</h2>
+                    <p class="book-author">by {{ book[1] }}</p>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
         {% endif %}
     </main>
 
     <footer>
-        <p>&copy; 2023 Book Recommendation Website</p>
+        <p>&copy; 2024 Book Recommendation Website</p>
     </footer>
 </body>
 </html>
